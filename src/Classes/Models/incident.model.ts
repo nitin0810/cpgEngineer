@@ -7,6 +7,7 @@ export interface Incident {
     assignedServiceEngineerId:number;
     assignedServiceEngineerName: string;
     assignedServiceEngineerPicUrl: string;
+    lastScheduleDate:string;
     billNumber: string;
     closedOn:string;
     createdAt: string;

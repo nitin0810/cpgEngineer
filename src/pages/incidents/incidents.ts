@@ -47,6 +47,7 @@ export class IncidentsPage {
 
         this.incidents.all = res;
         this.groupIncidents(res);
+        this.setIntialShownIncidents();
         this.currentPage = 1;
         refresher ? refresher.complete() : this.customService.hideLoader();
       }, (err: any) => {
@@ -56,9 +57,12 @@ export class IncidentsPage {
       });
   }
 
+  setIntialShownIncidents(){
+    this.shownIncidents =  this.incidents[this.selectedSegment];
+  }
+
   onSegmentChange(value: string) {
-    console.log(value);
-    
+
     this.selectedSegment = value;
     switch (this.selectedSegment) {
       case 'assigned': this.shownIncidents = this.incidents.assigned;
@@ -68,36 +72,34 @@ export class IncidentsPage {
       case 'fixed': this.shownIncidents = this.incidents.fixed;
         break;
       case 'notFixed': this.shownIncidents = this.incidents.notFixed;
-        break;  
-    }    
-   
+        break;
+    }
+
   }
 
   groupIncidents(list: Array<Incident>) {
-    this.incidents.assigned=[];
-     this.incidents.scheduled =[];
-      this.incidents.fixed =[];
-       this.incidents.notFixed = [];
+    this.incidents.assigned = [];
+    this.incidents.scheduled = [];
+    this.incidents.fixed = [];
+    this.incidents.notFixed = [];
 
     list.forEach(inc => {
-      console.log(inc.statusName);
-      
+
       switch (inc.statusName) {
-        case 'Assigned Service Engineer': this.incidents.assigned.push(inc);
+        case 'Assigned Service Engineer':
+          this.incidents.assigned.push(inc);
           break;
-        case 'scheduled': console.log('ssssssss');
-        
-        this.incidents.scheduled.push(inc);
+        case 'Schedule':
+          this.incidents.scheduled.push(inc);
           break;
-        case 'fixed': this.incidents.fixed.push(inc);
+        case 'Fixed':
+          this.incidents.fixed.push(inc);
           break;
-        case 'notFixed': this.incidents.notFixed.push(inc);
+        case 'Not Fixed':
+          this.incidents.notFixed.push(inc);
           break;
       }
     });
-
-    console.log(this.incidents);
-    
 
   }
 
@@ -124,8 +126,8 @@ export class IncidentsPage {
   }
 
 
-  openEngineerIncidentPage(index: number) {
-    this.navCtrl.push('EngineerIncidentPage', { 'incident': this.incidents[index] });
+  openIncidentPage(inc:Incident) {
+    this.navCtrl.push('IncidentPage', { 'incident': inc });
   }
 
   onSort() {

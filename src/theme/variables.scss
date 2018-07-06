@@ -94,3 +94,12 @@ $colors: (
 }
 
 $action-sheet-ios-button-text-color:color($colors,primary);
+
+.status-image{
+  height: 100px;
+    width: auto;
+}
+.center-block{
+  display:block;
+  margin:auto;
+}

@@ -1,0 +1,48 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Fixed</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list-header>
+    <h4>
+      <b>Customer Signature</b>
+    </h4>
+  </ion-list-header>
+  <ion-item *ngIf="!signature">
+    <signature-pad [options]="signaturePadOptions"></signature-pad>
+
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button full small round color="primary" (click)="savePad()">Save</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button full small round color="danger" (click)="clearPad()">Clear</button>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+
+  <div *ngIf="signature">
+    <ion-row>
+      <ion-col width-80>
+        <img [src]="signature" />
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ion-item>
+    <ion-label stacked>Comment</ion-label>
+    <ion-input (ionChange)="comment=$event.value"></ion-input>
+  </ion-item>
+
+  <div padding>
+
+    <button ion-button full round color="primary" (click)="onSubmit()">Submit</button>
+  </div>
+
+</ion-content>

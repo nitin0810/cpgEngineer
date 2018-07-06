@@ -1,0 +1,82 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{title  | titlecase}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item class="shadow" no-lines>
+    <img item-start style="height: 70px;width: 70px" [src]="incident.productPicUrl">
+    <h3>
+      <b>Product : </b>{{incident.productName}}</h3>
+    <h3>
+      <b>Model : </b>{{incident.productModelNumber}}
+    </h3>
+    <h3>
+      <b>Purchase Date : </b>{{incident.productPurchaseDate}}</h3>
+  </ion-item>
+
+  <ion-card>
+    <ion-item text-wrap>
+      <ion-icon item-start name="checkmark-circle" color="primary"></ion-icon>
+      <ion-label>Warranty : </ion-label>
+      <p *ngIf="incident.productWarrantyStart && incident.productWarrantyEnd" item-end>{{incident.productWarrantyStart +' - '+ incident.productWarrantyEnd}}</p>
+      <p *ngIf="!(incident.productWarrantyStart && incident.productWarrantyEnd)" item-end>NA</p>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>Incident Details</ion-card-header>
+    <ion-item text-wrap>
+        <small>Title</small>
+        <p>{{incident.title}}</p>
+      </ion-item>
+    <ion-item text-wrap>
+      <small>Description</small>
+      <p>{{incident.description}}</p>
+    </ion-item>
+    <ion-item >
+      <ion-icon item-start name="checkmark-circle" color="primary"></ion-icon>
+      <span>Status : </span>
+      <b float-right>{{incident.statusName}}</b>
+    </ion-item>
+  </ion-card>
+
+  <div [ngSwitch]="incident.statusName">
+
+      <div *ngSwitchCase="'Assigned Service Engineer'">
+        <button ion-button full round (click)="onSchedule(false)">Schedule</button>
+      </div>
+
+
+      <div *ngSwitchCase="incident.statusName==='schedule' || incident.statusName==='reschedule'">
+
+        <ion-item>
+          <ion-icon color="primary" item-start name="
+          "></ion-icon>
+          <ion-label>Scheduled : </ion-label>
+          <p item-end>{{incident.lastScheduleDate | date:'short'}}</p>
+        </ion-item>
+
+        <ion-row>
+          <ion-col col-4>
+            <button ion-button small round full (click)="onSchedule(true)">Reschedule</button>
+          </ion-col>
+    
+          <ion-col col-4>
+            <button ion-button small round full (click)="onFixed()">Fixed</button>
+          </ion-col>
+          <ion-col col-4>
+            <button ion-button small round full (click)="onNotFixed()">Not Fixed</button>
+          </ion-col>
+        </ion-row>
+      </div>
+
+
+    </div>
+</ion-content>

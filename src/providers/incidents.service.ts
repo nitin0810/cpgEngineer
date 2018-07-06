@@ -18,12 +18,25 @@ export class IncidentService {
 
 
     getIncidents(pageNo) {
-        return this.http.get(`/se/complaint/page/${pageNo}`)
-            .map((res: Array<Incident>) => {
-                console.log(res);
-                return res;
-            });
+        return this.http.get(`/se/complaint/page/${pageNo}`);
     }
+
+    updateIncidentWithImg(updateInfo: any) {
+
+    }
+
+    updateIncidentWithoutImg(updateInfo: any,incidentId:number) {
+        let fd = new FormData();
+        for (const key in updateInfo) {
+            fd.append(key, updateInfo[key]);
+        }
+
+        return this.http.put(`/se/complaint/${incidentId}`,fd);
+    }
+
+    // getIncident(id:number) {
+    //     return this.http.get(`/se/complaint/${id}`);
+    // }
 
 
     // // requests related to report incident
