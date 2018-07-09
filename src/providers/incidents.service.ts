@@ -34,6 +34,14 @@ export class IncidentService {
         return this.http.put(`/se/complaint/${incidentId}`,fd);
     }
 
+    getHistory(id:number){
+        return this.http.get(`/se/complaint/${id}/history`);
+    }
+
+    getContact(id:number){
+        return this.http.get(`/se/complaint/${id}/customer-address`);
+    }
+
     // getIncident(id:number) {
     //     return this.http.get(`/se/complaint/${id}`);
     // }

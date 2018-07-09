@@ -1,8 +1,7 @@
-
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{title  | titlecase}}</ion-title>
+    <ion-title>{{title | titlecase}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -33,14 +32,14 @@
   <ion-card>
     <ion-card-header>Incident Details</ion-card-header>
     <ion-item text-wrap>
-        <small>Title</small>
-        <p>{{incident.title}}</p>
-      </ion-item>
+      <small>Title</small>
+      <p>{{incident.title}}</p>
+    </ion-item>
     <ion-item text-wrap>
       <small>Description</small>
       <p>{{incident.description}}</p>
     </ion-item>
-    <ion-item >
+    <ion-item>
       <ion-icon item-start name="checkmark-circle" color="primary"></ion-icon>
       <span>Status : </span>
       <b float-right>{{incident.statusName}}</b>
@@ -49,34 +48,73 @@
 
   <div [ngSwitch]="incident.statusName">
 
-      <div *ngSwitchCase="'Assigned Service Engineer'">
-        <button ion-button full round (click)="onSchedule(false)">Schedule</button>
-      </div>
-
-
-      <div *ngSwitchCase="incident.statusName==='schedule' || incident.statusName==='reschedule'">
-
-        <ion-item>
-          <ion-icon color="primary" item-start name="
-          "></ion-icon>
-          <ion-label>Scheduled : </ion-label>
-          <p item-end>{{incident.lastScheduleDate | date:'short'}}</p>
-        </ion-item>
-
-        <ion-row>
-          <ion-col col-4>
-            <button ion-button small round full (click)="onSchedule(true)">Reschedule</button>
-          </ion-col>
-    
-          <ion-col col-4>
-            <button ion-button small round full (click)="onFixed()">Fixed</button>
-          </ion-col>
-          <ion-col col-4>
-            <button ion-button small round full (click)="onNotFixed()">Not Fixed</button>
-          </ion-col>
-        </ion-row>
-      </div>
-
-
+    <div *ngSwitchCase="'Assigned Service Engineer'">
+      <button ion-button full round (click)="onSchedule(false)">Schedule</button>
     </div>
+
+
+    <div *ngSwitchCase="incident.statusName==='Schedule' || incident.statusName==='Reschedule'?incident.statusName:''">
+
+      <ion-item>
+        <ion-icon color="primary" item-start name="time"></ion-icon>
+        <ion-label>Scheduled : </ion-label>
+        <p item-end>{{incident.lastScheduleDate | date:'short'}}</p>
+      </ion-item>
+
+      <div text-center *ngIf="!contactInfo">
+        <button ion-button small clear full (click)="onContact()">Show customer contact</button>
+      </div>
+      <ion-item *ngIf="contactInfo">
+        
+        <h4>       
+          <b>{{contactInfo.customerAddressType}} Address</b>
+        </h4>
+        <p>{{contactInfo.customerAddress}}</p>
+        <p>{{contactInfo.customerCity}}, {{contactInfo.customerPostalCode}}</p>
+        <p>{{contactInfo.customerState}}</p>
+        <p>{{contactInfo.customerCountry}}</p>
+        <p>{{contactInfo.customerPhone}}</p>
+      </ion-item>
+      <div text-center>
+        <button ion-button small clear full (click)="onHistory()">Go to History</button>
+      </div>
+
+      <ion-row>
+        <ion-col col-4>
+          <button ion-button small round full (click)="onSchedule(true)">Reschedule</button>
+        </ion-col>
+
+        <ion-col col-4>
+          <button ion-button small round full (click)="onFixed()">Fixed</button>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button small round full (click)="onNotFixed()">Not Fixed</button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngSwitchCase="incident.statusName==='Fixed'">
+      <ion-row>
+        <ion-col col-4>
+          <button ion-button small round full (click)="onContact()">Customer contact</button>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button small round full (click)="onHistory()">History</button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngSwitchCase="incident.statusName==='Not Fixed'">
+      <ion-row>
+        <ion-col col-4>
+          <button ion-button small round full (click)="onContact()">Customer contact</button>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button small round full (click)="onHistory()">History</button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+
+  </div>
 </ion-content>

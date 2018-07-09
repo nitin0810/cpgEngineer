@@ -16,7 +16,8 @@ export class IncidentPage {
 
   title = '';
   incident: Incident;
-
+  contactInfo:any;
+    
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -26,7 +27,7 @@ export class IncidentPage {
   ) {
     this.incident = this.navParams.get('incident');
     this.title = this.incident.productName;
-
+    
   }
 
   ionViewDidLoad() {
@@ -73,10 +74,10 @@ export class IncidentPage {
             this.reschedule(data[0]);
           }
 
-        }
+        }     
       }]
     });
-    alert.present();
+    alert.present();      
   }
 
   reschedule(comment: string) {
@@ -103,6 +104,32 @@ export class IncidentPage {
     this.incident.statusColor = updatedIncident.statusColor;
     this.incident.statusId = updatedIncident.statusId;
     this.incident.statusName = updatedIncident.statusName;
+  }
+
+  onContact(){
+    this.customService.showLoader();
+    this.incidentService.getContact( this.incident.id)
+      .subscribe((res: any) => {
+        this.customService.hideLoader();
+        this.contactInfo = res;
+      }, (err: any) => {
+
+        this.customService.hideLoader();
+        this.customService.showToast(err.msg);
+      });
+  }
+     
+  onHistory(){
+    this.customService.showLoader();
+    this.incidentService.getHistory( this.incident.id)
+      .subscribe((res: any) => {
+        this.customService.hideLoader();
+        this.navCtrl.push("HistoryPage",{'history':res});
+      }, (err: any) => {
+
+        this.customService.hideLoader();
+        this.customService.showToast(err.msg);
+      });
   }
 
 

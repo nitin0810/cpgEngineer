@@ -14,6 +14,9 @@ import { Network } from '@ionic-native/network';
 import { NetworkService } from '../providers/network.service';
 import { IncidentService } from '../providers/incidents.service';
 
+import * as ionicGalleryModal from 'ionic-gallery-modal';
+import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -36,6 +39,10 @@ import { IncidentService } from '../providers/incidents.service';
     AuthService,
     Network,
     NetworkService,
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: ionicGalleryModal.GalleryModalHammerConfig,
+    },
     IncidentService
   ]
 })

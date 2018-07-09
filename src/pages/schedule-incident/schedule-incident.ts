@@ -40,10 +40,13 @@ export class ScheduleIncidentPage {
 
   onChangeTime({ comment, date, time }) {
     console.log(comment, date, time);
-
+// Time format of time variable depends on format of inital value provided to ion-datetime(if there is any)
+// We need time in HH:MM:SS
+// if line 33 executes, time output is in HH:MM:SS, otherwise is in HH:MM
+// hence we have to handle this case
     const info = {
       comment,
-      scheduleDate: `${date}T${time}`,
+      scheduleDate: this.navParams.get('lastScheduleDate')?`${date}T${time}`:`${date}T${time}:00`,
       updateInfo: this.reschedule ? 'reschedule' : 'schedule'
     };
 
