@@ -16,7 +16,7 @@ export class IncidentPage {
 
   title = '';
   incident: Incident;
-  contactInfo:any;
+  contactInfo:any;      
     
   constructor(
     public navCtrl: NavController,

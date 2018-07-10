@@ -19,6 +19,8 @@ export class ScheduleIncidentPage {
   currentTime:'';
   callback: any;
 
+  get minDate(){return new Date().toISOString().slice(0,10);}
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private customService: CustomService,
@@ -47,7 +49,7 @@ export class ScheduleIncidentPage {
     const info = {
       comment,
       scheduleDate: this.navParams.get('lastScheduleDate')?`${date}T${time}`:`${date}T${time}:00`,
-      updateInfo: this.reschedule ? 'reschedule' : 'schedule'
+      updateInfo: this.reschedule ? 'reschedule' : 'schedule', 
     };
 
     this.updateIncident(info);

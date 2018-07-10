@@ -16,7 +16,7 @@
       <ion-item>
         <ion-icon name="calendar" item-left color="primary"></ion-icon>
         <ion-label>Select Date</ion-label>
-        <ion-datetime [ngModel]="currentDate" #date="ngModel" name="date" required displayFormat="MMM DD, YYYY" pickerFormat="MMM DD, YYYY "></ion-datetime>
+        <ion-datetime [ngModel]="currentDate" #date="ngModel" name="date" [min]="minDate" required displayFormat="MMM DD, YYYY" pickerFormat="MMM DD, YYYY "></ion-datetime>
       </ion-item>
       <ion-item no-lines *ngIf="date.dirty && date.invalid ">
         <p style="color: red">Date is required.</p>

@@ -23,24 +23,28 @@ export class IncidentService {
 
     updateIncidentWithImg(updateInfo: any) {
 
-    }
+    }   
 
-    updateIncidentWithoutImg(updateInfo: any,incidentId:number) {
+    updateIncidentWithoutImg(updateInfo: any, incidentId: number) {
         let fd = new FormData();
         for (const key in updateInfo) {
             fd.append(key, updateInfo[key]);
         }
 
-        return this.http.put(`/se/complaint/${incidentId}`,fd);
+        return this.http.put(`/se/complaint/${incidentId}`, fd);
     }
 
-    getHistory(id:number){
+    getHistory(id: number) {
         return this.http.get(`/se/complaint/${id}/history`);
     }
 
-    getContact(id:number){
+    getContact(id: number) {
         return this.http.get(`/se/complaint/${id}/customer-address`);
     }
+
+
+
+
 
     // getIncident(id:number) {
     //     return this.http.get(`/se/complaint/${id}`);
