@@ -16,7 +16,9 @@ export class IncidentPage {
 
   title = '';
   incident: Incident;
-  contactInfo:any;      
+  contactInfo:any;   
+  
+  callback:any;
     
   constructor(
     public navCtrl: NavController,
@@ -26,6 +28,7 @@ export class IncidentPage {
     private alertCtrl: AlertController
   ) {
     this.incident = this.navParams.get('incident');
+    this.callback = this.navParams.get('callback');
     this.title = this.incident.productName;
     
   }
@@ -48,6 +51,7 @@ export class IncidentPage {
   onFixed() {
     const clbk = (updatedIncident: Incident) => {
       if (updatedIncident) {
+        this.incident.signatureUrl = updatedIncident.signatureUrl;
         this.updateStatusInfo(updatedIncident);
       }
     };
@@ -98,12 +102,14 @@ export class IncidentPage {
         this.customService.hideLoader();
         this.customService.showToast(err.msg);
       });
-  }
-
+  }        
+  
   updateStatusInfo(updatedIncident: any) {
     this.incident.statusColor = updatedIncident.statusColor;
     this.incident.statusId = updatedIncident.statusId;
     this.incident.statusName = updatedIncident.statusName;
+    // for changing the postions of incident on main incidents list page 
+    if(this.callback){this.callback();}
   }
 
   onContact(){

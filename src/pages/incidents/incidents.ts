@@ -78,6 +78,7 @@ export class IncidentsPage {
   }
 
   groupIncidents(list: Array<Incident>) {
+    
     this.incidents.assigned = [];
     this.incidents.scheduled = [];
     this.incidents.fixed = [];
@@ -85,17 +86,18 @@ export class IncidentsPage {
 
     list.forEach(inc => {
 
-      switch (inc.statusName) {
-        case 'Assigned Service Engineer':
+      switch (inc.statusId) {
+        case 2:
+        case 9: // for onHold status
           this.incidents.assigned.push(inc);
           break;
-        case 'Schedule':
+        case 4:
           this.incidents.scheduled.push(inc);
           break;
-        case 'Fixed':
+        case 7:
           this.incidents.fixed.push(inc);
           break;
-        case 'Not Fixed':
+        case 6:
           this.incidents.notFixed.push(inc);
           break;
       }
@@ -127,7 +129,12 @@ export class IncidentsPage {
 
 
   openIncidentPage(inc:Incident) {
-    this.navCtrl.push('IncidentPage', { 'incident': inc });
+    const clbk=()=>{
+      this.groupIncidents(this.incidents.all);
+this.setIntialShownIncidents();
+
+    }
+    this.navCtrl.push('IncidentPage', { 'incident': inc,'callback':clbk });
   }
 
   onSort() {

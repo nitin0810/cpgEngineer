@@ -10,7 +10,7 @@
 <ion-content padding>
 
   <ion-item class="shadow" no-lines>
-    <img item-start style="height: 70px;width: 70px" [src]="incident.productPicUrl">
+    <img item-start style="height: 70px;width: 70px" [src]="incident.registeredProductPicUrl">
     <h3>
       <b>Product : </b>{{incident.productName}}</h3>
     <h3>
@@ -46,14 +46,14 @@
     </ion-item>
   </ion-card>
 
-  <div [ngSwitch]="incident.statusName">
+  <div [ngSwitch]="incident.statusId">
 
-    <div *ngSwitchCase="'Assigned Service Engineer'">
+    <div *ngSwitchCase="2">
       <button ion-button full round (click)="onSchedule(false)">Schedule</button>
     </div>
 
 
-    <div *ngSwitchCase="incident.statusName==='Schedule' || incident.statusName==='Reschedule'?incident.statusName:''">
+    <div *ngSwitchCase="4">
 
       <ion-item>
         <ion-icon color="primary" item-start name="time"></ion-icon>
@@ -65,8 +65,8 @@
         <button ion-button small clear full (click)="onContact()">Show customer contact</button>
       </div>
       <ion-item *ngIf="contactInfo">
-        
-        <h4>       
+
+        <h4>
           <b>{{contactInfo.customerAddressType}} Address</b>
         </h4>
         <p>{{contactInfo.customerAddress}}</p>
@@ -87,32 +87,74 @@
         <ion-col col-4>
           <button ion-button small round full (click)="onFixed()">Fixed</button>
         </ion-col>
+        
         <ion-col col-4>
           <button ion-button small round full (click)="onNotFixed()">Not Fixed</button>
         </ion-col>
       </ion-row>
     </div>
 
-    <div *ngSwitchCase="incident.statusName==='Fixed'">
-      <ion-row>
-        <ion-col col-4>
-          <button ion-button small round full (click)="onContact()">Customer contact</button>
-        </ion-col>
-        <ion-col col-4>
-          <button ion-button small round full (click)="onHistory()">History</button>
-        </ion-col>
-      </ion-row>
+    <div *ngSwitchCase="7">
+      <ion-item>
+        <ion-icon item-start name="hammer" color="primary"></ion-icon>
+        <ion-label>Fixed On: </ion-label>
+        <p item-end>{{incident.lastModifiedAt | date}}</p>
+      </ion-item>
+      <ion-card>
+        <ion-card-header>Customer Signature</ion-card-header>
+        <div padding >
+          <img [src]="incident.signatureUrl" alt="Signature Image">
+        </div>
+      </ion-card>
+
+      <div padding *ngIf="!contactInfo">
+        <button ion-button small round full (click)="onContact()">Show customer contact</button>
+      </div>
+      <ion-item *ngIf="contactInfo">
+          <h4>
+            <b>{{contactInfo.customerAddressType}} Address</b>
+          </h4>
+          <p>{{contactInfo.customerAddress}}</p>
+          <p>{{contactInfo.customerCity}}, {{contactInfo.customerPostalCode}}</p>
+          <p>{{contactInfo.customerState}}</p>
+          <p>{{contactInfo.customerCountry}}</p>
+          <p>{{contactInfo.customerPhone}}</p>
+        </ion-item>
+      <div padding>
+        <button ion-button small round full (click)="onHistory()">History</button>
+      </div>
+
     </div>
 
-    <div *ngSwitchCase="incident.statusName==='Not Fixed'">
-      <ion-row>
+    <div *ngSwitchCase="6">
+     <div padding *ngIf="!contactInfo">
+        <button ion-button small round full (click)="onContact()">Show customer contact</button>
+      </div>
+      <ion-item *ngIf="contactInfo">
+          <h4>
+            <b>{{contactInfo.customerAddressType}} Address</b>
+          </h4>
+          <p>{{contactInfo.customerAddress}}</p>
+          <p>{{contactInfo.customerCity}}, {{contactInfo.customerPostalCode}}</p>
+          <p>{{contactInfo.customerState}}</p>
+          <p>{{contactInfo.customerCountry}}</p>
+          <p>{{contactInfo.customerPhone}}</p>
+        </ion-item>
+
+      <div padding>
+        <button ion-button small round full (click)="onHistory()">History</button>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="9">
+      <ion-card>
+        <ion-item text-wrap>
+          <p>This complaint has been put on hold after recieving unavailablity message from customer. Will be rescheduled soon.</p>
+        </ion-item>
         <ion-col col-4>
-          <button ion-button small round full (click)="onContact()">Customer contact</button>
+          <button ion-button small round (click)="onHistory()">History</button>
         </ion-col>
-        <ion-col col-4>
-          <button ion-button small round full (click)="onHistory()">History</button>
-        </ion-col>
-      </ion-row>
+      </ion-card>
     </div>
 
 

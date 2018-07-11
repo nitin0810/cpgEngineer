@@ -35,11 +35,9 @@ clbk:any;
     this.clbk =  this.navParams.get('clbk');
   }
 
-  ionViewDidLoad() {
-  }
+ 
   clearPad() {
     this.signaturePad.clear();
-
   }
 
   savePad() {
@@ -64,7 +62,7 @@ clbk:any;
     const payLoad={
       comment:this.comment,
       updateInfo:'fixed',
-      pic:this.signature
+      signature:this.signature
     };
     this.updateStatus(payLoad);
   }
@@ -75,7 +73,7 @@ clbk:any;
       .subscribe((res: any) => {
         this.customService.hideLoader();
         this.customService.showToast('Status updated successfully');
-        if(this.clbk){this.clbk();}
+        if(this.clbk){this.clbk(res);}
         this.navCtrl.pop();
       }, (err: any) => {
 

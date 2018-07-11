@@ -39,4 +39,6 @@ export interface Incident {
     statusName: string;
     title: string;
     complaintPicUrl:string;
+    registeredProductPicUrl:string;
+    signatureUrl:string;
 };
