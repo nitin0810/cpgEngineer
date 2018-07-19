@@ -1,53 +1,55 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{title | titlecase}}</ion-title>
+    <ion-title>Installation</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
   <ion-item class="shadow" no-lines>
-    <img item-start style="height: 70px;width: 70px" [src]="incident.registeredProductPicUrl">
+    <img item-start style="height: 70px;width: 70px" [src]="installation.registeredProductPicUrl">
     <h3>
-      <b>Product : </b>{{incident.productName}}</h3>
+      <b>Product : </b>{{installation.productName}}</h3>
     <h3>
-      <b>Model : </b>{{incident.productModelNumber}}
+      <b>Model : </b>{{installation.productModelNumber}}
     </h3>
     <h3>
-      <b>Purchase Date : </b>{{incident.productPurchaseDate}}</h3>
+      <b>Purchase Date : </b>{{installation.productPurchaseDate}}</h3>
   </ion-item>
 
   <ion-card>
     <ion-item text-wrap>
       <ion-icon item-start name="checkmark-circle" color="primary"></ion-icon>
       <ion-label>Warranty : </ion-label>
-      <p item-end>{{giveWarranty(incident.productWarrantyEnd)}}</p>
+      <p item-end>{{giveWarranty(installation.productWarrantyEnd)}}</p>
     </ion-item>
   </ion-card>
 
   <ion-card>
-    <ion-card-header>Incident Details</ion-card-header>
-    <ion-item text-wrap>
-      <small>Title</small>
-      <p>{{incident.title}}</p>
-    </ion-item>
-    <ion-item text-wrap>
-      <small>Description</small>
-      <p>{{incident.description}}</p>
-    </ion-item>
+
     <ion-item>
       <ion-icon item-start name="checkmark-circle" color="primary"></ion-icon>
-      <span>Status : </span>
-      <b float-right>{{incident.statusName}}</b>
+      <ion-label>Status : </ion-label>
+      <b item-end>{{installation.statusName}}</b>
     </ion-item>
+    <ion-item>
+      <ion-icon item-start name="information-circle" color="primary"></ion-icon>
+      <ion-label>Priority : </ion-label>
+      <b item-end>{{installation.priority}}</b>
+    </ion-item>
+    <!-- <ion-item text-wrap *ngIf="installation.description">
+      <small>Customer Comment</small>
+      <p>{{installation.description}}</p>
+    </ion-item> -->
   </ion-card>
 
-  <div [ngSwitch]="incident.statusId">
 
-    <div *ngSwitchCase="2">
+  <div [ngSwitch]="installation.statusId">
+
+<!-- ASSIGNED -->
+    <div *ngSwitchCase="10">
       <button ion-button full round (click)="onSchedule(false)">Schedule</button>
     </div>
 
@@ -57,7 +59,7 @@
       <ion-item>
         <ion-icon color="primary" item-start name="time"></ion-icon>
         <ion-label>Scheduled : </ion-label>
-        <p item-end>{{incident.lastScheduleDate | date:'short'}}</p>
+        <p item-end>{{installation.lastScheduleDate | date:'short'}}</p>
       </ion-item>
 
       <div text-center *ngIf="!contactInfo">
@@ -84,25 +86,22 @@
         </ion-col>
 
         <ion-col col-4>
-          <button ion-button small round full (click)="onFixed()">Fixed</button>
+          <button ion-button small round full (click)="onInstalled()">Installed</button>
         </ion-col>
         
-        <ion-col col-4>
-          <button ion-button small round full (click)="onNotFixed()">Not Fixed</button>
-        </ion-col>
       </ion-row>
     </div>
 
-    <div *ngSwitchCase="7">
+    <div *ngSwitchCase="11">
       <ion-item>
         <ion-icon item-start name="hammer" color="primary"></ion-icon>
-        <ion-label>Fixed On: </ion-label>
-        <p item-end>{{incident.lastModifiedAt | date}}</p>
+        <ion-label>Installed On: </ion-label>
+        <p item-end>{{installation.lastModifiedAt | date}}</p>
       </ion-item>
       <ion-card>
         <ion-card-header>Customer Signature</ion-card-header>
         <div padding >
-          <img [src]="incident.signatureUrl" alt="Signature Image">
+          <img [src]="installation.signatureUrl" alt="Signature Image">
         </div>
       </ion-card>
 

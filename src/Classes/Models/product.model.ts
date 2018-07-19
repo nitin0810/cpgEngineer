@@ -35,3 +35,38 @@ export interface Address{
     phone: number | string;
     id?:number | string
 }
+
+export interface Installation {
+    lastModifiedAt: string;
+    productBillUrl: string,
+    statusColor: string;
+    assignedServiceEngineerId: number;
+    assignedServiceEngineerName: string;
+    assignedServiceEngineerPicUrl: string;
+    billNumber: string;
+    createdAt: string;
+    customerContactNo: string;
+    customerEmail: string;
+    customerId: number;
+    customerName: string;
+    dealerContact: string;
+    dealerName: string;
+    id: number;
+    installationPicUrl: string;
+    isCustomerAvailable: boolean;
+    isProductVerified: boolean;
+    lastScheduleDate: string;
+    priority: string;
+    productInstallationDateTime: string;
+    productModelNumber: string;
+    productName: string;
+    productPurchaseDate: string;
+    productRegistrationId: number
+    productWarrantyEnd: string;
+    productWarrantyStart: string;
+    rating: number;
+    registeredProductPicUrl: string;
+    signatureUrl: string;
+    statusId: number;
+    statusName: string;
+}

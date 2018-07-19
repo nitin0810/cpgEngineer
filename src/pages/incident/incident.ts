@@ -138,5 +138,24 @@ export class IncidentPage {
       });
   }
 
+  giveWarranty(endDate: string | null) {
+
+    // if endDate is null
+    if (!endDate) { return 'N.A' }
+
+    const ed = new Date(endDate);
+    ed.setHours(0);
+    ed.setMinutes(0);
+    ed.setSeconds(0);
+    ed.setMilliseconds(0);
+
+    const today = new Date();
+    if (today < ed) {
+      return `Expires on ${ed.toLocaleDateString()}`;
+    } else {
+      return 'Expired';
+    }
+  }
+
 
 }

@@ -83,6 +83,7 @@ export class UserSessionManage {
         this.sideMenuOptions = [
 
             { title: 'Home', component: "HomePage", icon: 'home' },
+            { title: 'Installations', component: "InstallationsPage", icon: 'build' },
             { title: 'Incidents', component: "IncidentsPage", icon: 'megaphone' },
             { title: 'Logout', component: 'NA', icon: 'log-out' }
         ];

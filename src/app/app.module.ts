@@ -16,6 +16,7 @@ import { IncidentService } from '../providers/incidents.service';
 
 import * as ionicGalleryModal from 'ionic-gallery-modal';
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { InstallationService } from '../providers/installation.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
     AuthService,
     Network,
     NetworkService,
+    InstallationService,
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: ionicGalleryModal.GalleryModalHammerConfig,
