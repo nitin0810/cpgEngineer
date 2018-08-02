@@ -1,20 +1,20 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Fixed</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="background-color">
 
-  <ion-list-header>
+  <!-- <ion-list-header>
     <h4>
       <b>Customer Signature</b>
     </h4>
-  </ion-list-header>
-  <ion-item *ngIf="!signature">
+  </ion-list-header> -->
+  <!-- <ion-item *ngIf="!signature">
     <signature-pad [options]="signaturePadOptions"></signature-pad>
 
     <ion-row>
@@ -25,20 +25,55 @@
         <button ion-button full small round color="danger" (click)="clearPad()">Clear</button>
       </ion-col>
     </ion-row>
-  </ion-item>
+  </ion-item> -->
+  <ion-card>
+      <div class="centerIcon">
+          <ion-icon  name="md-color-filter" class="iconSize" color="primary"></ion-icon>
+          <div>
+            <b class="primaryColor">Customer's signature</b>
+          </div>
+        </div>
+      <div  *ngIf="!signature" class="signtaurePad" >
+          <signature-pad [options]="signaturePadOptions"></signature-pad>
+       </div>
+   <div *ngIf="signature">
+      <ion-row>
+        <ion-col width-80>
+          <img [src]="signature" />
+        </ion-col>
+      </ion-row>
+    </div>
 
-  <div *ngIf="signature">
-    <ion-row>
-      <ion-col width-80>
-        <img [src]="signature" />
+    <ion-item>
+        <ion-icon name="chatbubbles" item-left color="primary"></ion-icon>
+        <ion-label stacked>Comment</ion-label>
+        <ion-input (ionChange)="comment=$event.value" class="commentBox"></ion-input>
+    </ion-item>
+
+    <ion-row >
+        <ion-col col-6 padding>
+          <button ion-button full small round color="secondary" (click)="savePad()">Save</button>
+        </ion-col>
+        <ion-col col-6 padding>
+          <button ion-button full small round color="danger" (click)="clearPad()">Clear</button>
+        </ion-col>
+      </ion-row>
+  
+  </ion-card>
+   
+  <!-- <ion-row>
+      <ion-col col-6>
+        <button ion-button full small round color="primary" (click)="savePad()">Save</button>
       </ion-col>
-    </ion-row>
-  </div>
+      <ion-col col-6>
+        <button ion-button full small round color="danger" (click)="clearPad()">Clear</button>
+      </ion-col>
+    </ion-row> -->
 
-  <ion-item>
+  <!-- <ion-item>
     <ion-label stacked>Comment</ion-label>
     <ion-input (ionChange)="comment=$event.value"></ion-input>
-  </ion-item>
+  </ion-item> -->
 
   <div padding>
 

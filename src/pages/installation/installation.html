@@ -1,13 +1,14 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Installation</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+ <!-- <ion-content class="background-color">
+
   <ion-item class="shadow" no-lines>
     <img item-start style="height: 70px;width: 70px" [src]="installation.registeredProductPicUrl">
     <h3>
@@ -39,17 +40,14 @@
       <ion-label>Priority : </ion-label>
       <b item-end>{{installation.priority}}</b>
     </ion-item>
-    <!-- <ion-item text-wrap *ngIf="installation.description">
-      <small>Customer Comment</small>
-      <p>{{installation.description}}</p>
-    </ion-item> -->
+    
   </ion-card>
 
 
-  <div [ngSwitch]="installation.statusId">
+  <div [ngSwitch]="installation.statusId"> -->
 
 <!-- ASSIGNED -->
-    <div *ngSwitchCase="10">
+     <!-- <div *ngSwitchCase="10">
       <button ion-button full round (click)="onSchedule(false)">Schedule</button>
     </div>
 
@@ -90,9 +88,11 @@
         </ion-col>
         
       </ion-row>
-    </div>
+    </div>  -->
 
-    <div *ngSwitchCase="11">
+    <!-- < for installed> -->
+
+    <!-- <div *ngSwitchCase="11">
       <ion-item>
         <ion-icon item-start name="hammer" color="primary"></ion-icon>
         <ion-label>Installed On: </ion-label>
@@ -124,26 +124,7 @@
 
     </div>
 
-    <div *ngSwitchCase="6">
-     <div padding *ngIf="!contactInfo">
-        <button ion-button small round full (click)="onContact()">Show customer contact</button>
-      </div>
-      <ion-item *ngIf="contactInfo">
-          <h4>
-            <b>{{contactInfo.customerAddressType}} Address</b>
-          </h4>
-          <p>{{contactInfo.customerAddress}}</p>
-          <p>{{contactInfo.customerCity}}, {{contactInfo.customerPostalCode}}</p>
-          <p>{{contactInfo.customerState}}</p>
-          <p>{{contactInfo.customerCountry}}</p>
-          <p>{{contactInfo.customerPhone}}</p>
-        </ion-item>
-
-      <div padding>
-        <button ion-button small round full (click)="onHistory()">History</button>
-      </div>
-    </div>
-
+    
     <div *ngSwitchCase="9">
       <ion-card>
         <ion-item text-wrap>
@@ -157,4 +138,157 @@
 
 
   </div>
+</ion-content>   --> 
+
+<!--newCode-->
+<ion-content class="background-color">
+    <ion-card class="product-card">
+        <img [src]="installation.registeredProductPicUrl" class="productImage">
+        <div class="product-details" padding-left>
+          <ion-card-title class="brand">
+            <h4>
+              <b>{{installation.productModelNumber}}</b>
+            </h4>
+            <p>
+              {{installation.productName}}
+              <p>
+                <p>
+                  <b> Purchase Date : </b> {{installation.productPurchaseDate | date:'mediumDate'}}
+                </p>
+                <div [ngSwitch]="installation.statusId">
+                <div *ngSwitchCase="11" padding>
+                  <button ion-button small round full (click)="onHistory()">History</button>
+                </div>
+              </div>
+              <div [ngSwitch]="installation.statusId">
+                  <div *ngSwitchCase="4">
+                      <div text-center padding>
+                          <button ion-button small color="primary" round full (click)="onHistory()"> History</button>
+                        </div>
+                   </div>
+              </div>
+          </ion-card-title>
+        </div>
+      </ion-card>
+      <div [ngSwitch]="installation.statusId">
+          <ion-card *ngSwitchCase="11">
+            <div class="centerIcon">
+              <ion-icon name="hammer" color="primary" class="iconSize"></ion-icon>
+              <div>
+                <b>Installed On </b>
+              </div>
+            </div>
+            <div text-center margin-bottom>{{installation.lastModifiedAt | date}}</div>
+          </ion-card>
+          <ion-card *ngSwitchCase="4">
+              <div class="centerIcon">
+                  <ion-icon name="ios-alarm" class="iconSize"></ion-icon>
+                <div>
+                  <b>Scheduled </b>
+                </div>
+              </div>
+             <div text-center margin-bottom>{{installation.lastScheduleDate | date:'short'}}</div>
+         </ion-card>
+
+
+   </div>
+   <ion-card class="warrantyCard">
+      <div class="centerIcon">
+        <ion-icon name="time" color="primary" class="iconSize"></ion-icon>
+        <div>
+          <b>Important Dates</b>
+        </div>
+      </div>
+      <ion-grid class="gridrow">
+        <ion-row>
+          <p col-4 class="border-right">
+            <b>Installation</b>
+            <br>
+            <span *ngIf="installation.lastModifiedAt"> {{installation.lastModifiedAt | date:'mediumDate'}}</span>
+            <span *ngIf="!installation.lastModifiedAt"> Not Installed</span>
+          </p>
+
+          <p col-4 class="border-right">
+            <b>Status</b>
+            <br> {{installation.statusName}}
+          </p>
+          <p col-4>
+            <b> Priority </b>
+            <br> {{installation.priority}}
+          </p>
+        </ion-row>
+      </ion-grid>
+      <ion-grid class="warantyRow">
+        <ion-row>
+          <p col-6 class="border-right">
+            <b>Waranty Start</b>
+            <br> {{installation.productWarrantyStart}}
+          </p>
+          <p col-6>
+            <b>Waranty End</b>
+            <br> {{installation.productWarrantyEnd}}
+          </p>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    <div [ngSwitch]="installation.statusId">
+    <ion-card *ngSwitchCase="11">
+        <div class="centerIcon">
+            <ion-icon  name="md-color-filter" class="iconSize"></ion-icon>
+            <div>
+              <b>Customer's signature</b>
+            </div>
+          </div>
+        <div padding >
+          <img [src]="installation.signatureUrl" alt="Signature Image" >
+        </div>
+   </ion-card>
+   <div *ngSwitchCase="11" >
+   <div margin   *ngIf="!contactInfo"  >
+    <button ion-button small round full (click)="onContact()">Show customer contact</button>
+  </div>
+  <ion-card *ngIf="contactInfo" padding>
+      <div class="centerIcon">
+        <ion-icon name="ios-home" class="iconSize"></ion-icon>
+        <div class="primaryColor">{{contactInfo.customerAddressType}} Address</div>
+      </div>
+      <p>{{contactInfo.customerAddress}}</p>
+      <p>{{contactInfo.customerCity}}, {{contactInfo.customerPostalCode}}</p>
+      <p>{{contactInfo.customerState}} , {{contactInfo.customerCountry}}</p>
+      
+      <p>{{contactInfo.customerPhone}}</p>
+    </ion-card>
+  </div>
+    <div *ngSwitchCase="4" >
+      <div margin   *ngIf="!contactInfo"  >
+       <button ion-button small round full (click)="onContact()">Show customer contact</button>
+      </div>
+      <ion-card *ngIf="contactInfo" padding>
+          <div class="centerIcon">
+            <ion-icon name="ios-home" class="iconSize"></ion-icon>
+            <div class="primaryColor">{{contactInfo.customerAddressType}} Address</div>
+          </div>
+          <p>{{contactInfo.customerAddress}}</p>
+          <p>{{contactInfo.customerCity}}, {{contactInfo.customerPostalCode}}</p>
+          <p>{{contactInfo.customerState}} , {{contactInfo.customerCountry}}</p>
+          
+          <p>{{contactInfo.customerPhone}}</p>
+        </ion-card>
+   </div>
+   <div *ngSwitchCase="10" padding>
+      <button ion-button full small round (click)="onSchedule(false)">Schedule</button>
+    </div>
+  
+   </div>
+   <ion-fab  bottom right [ngSwitch]="installation.statusId" >
+      <button ion-fab color="secondary" *ngSwitchCase="4"><ion-icon name="md-more"></ion-icon></button>
+      <ion-fab-list side="top" style="right: 0;">
+       <div style="text-align: right;">
+      <button ion-button small round (click)="onSchedule(true)"color="secondary">Reschedule</button>
+      <button ion-button small round full (click)="onInstalled()" color="secondary">Installed</button>
+    </div>
+    </ion-fab-list>
+  </ion-fab>
+
+
 </ion-content>

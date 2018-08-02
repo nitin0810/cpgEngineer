@@ -1,15 +1,15 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{title | titlecase}}</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Incident details</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
-  <ion-item class="shadow" no-lines>
+  <!-- <ion-item class="shadow" no-lines>
     <img item-start style="height: 70px;width: 70px" [src]="incident.registeredProductPicUrl">
     <h3>
       <b>Product : </b>{{incident.productName}}</h3>
@@ -18,17 +18,84 @@
     </h3>
     <h3>
       <b>Purchase Date : </b>{{incident.productPurchaseDate}}</h3>
-  </ion-item>
+  </ion-item> -->
+  <ion-card class="product-card">
+    <img [src]="incident.registeredProductPicUrl" class="productImage">
+    <div class="product-details" padding-left>
+      <ion-card-title class="brand">
+        <h4>
+          <b>{{incident.productModelNumber}}</b>
+        </h4>
+        <p>
+          {{incident.productName}}
+          <p>
+            <p>
+              <b> Purchase Date : </b> {{incident.productPurchaseDate}}
+            </p> 
+            <div [ngSwitch]="incident.statusId">
+                <div *ngSwitchCase="4" padding> 
+                    <button ion-button full small round (click)="onHistory()"[style.background]="incident.statusColor">
+                    History</button>
+              </div>
+              <div *ngSwitchCase="7" padding>
+                  <button ion-button small full round (click)="onHistory()"[style.background]="incident.statusColor">History</button>
+              </div>
+            </div>   
+      </ion-card-title>
+    </div>
+  </ion-card>
+  <div [ngSwitch]="incident.statusId">
+    <ion-card *ngSwitchCase="4">
+      <div class="centerIcon">
+        <ion-icon name="alarm" [style.color]="incident.statusColor" class="iconSize"></ion-icon>
+        <div [style.color]="incident.statusColor" >Scheduled</div>
+      </div>
+      <div margin-bottom text-center>{{incident.lastScheduleDate | date:'short'}}</div>
+    </ion-card>
+    <ion-card *ngSwitchCase="7">
+        <div class="centerIcon">
+          <ion-icon item-start name="hammer" [style.color]="incident.statusColor" class="iconSize"></ion-icon>
+          <div [style.color]="incident.statusColor" >Fixed On</div>
+          </div>
+          <div margin-bottom text-center>{{incident.lastModifiedAt | date}}</div>
+      </ion-card>
+  </div>
+  <ion-card class="warrantyCard">
+    <div class="centerIcon">
+      <ion-icon name="time" [style.color]="incident.statusColor" class="iconSize"></ion-icon>
+      <div>
+        <b [style.color]="incident.statusColor">Important Dates</b>
+      </div>
+    </div>
+    <ion-grid class="">
+      <ion-row>
+        <p col-6 class="border-right" text-center>
+          <b > Warranty Start</b>
+          <br>
+          <span *ngIf="incident.productWarrantyStart">{{incident.productWarrantyStart | date:'mediumDate'}}</span>
+          <span *ngIf="!incident.productWarrantyStart">NA</span>
+        </p>
 
-  <ion-card>
+        <p col-6 class="" text-center>
+          <b>Warranty End</b>
+          <br>
+          <span *ngIf="incident.productWarrantyEnd"> {{incident.productWarrantyEnd | date:'mediumDate'}}</span>
+          <span *ngIf="!incident.productWarrantyEnd">NA</span>
+        </p>
+
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <!-- <ion-card>
     <ion-item text-wrap>
       <ion-icon item-start name="checkmark-circle" color="primary"></ion-icon>
       <ion-label>Warranty : </ion-label>
       <p item-end>{{giveWarranty(incident.productWarrantyEnd)}}</p>
     </ion-item>
-  </ion-card>
+  </ion-card> -->
 
-  <ion-card>
+  <!-- <ion-card>
     <ion-card-header>Incident Details</ion-card-header>
     <ion-item text-wrap>
       <small>Title</small>
@@ -43,38 +110,66 @@
       <span>Status : </span>
       <b float-right>{{incident.statusName}}</b>
     </ion-item>
+  </ion-card> -->
+  <ion-card>
+    <div class="centerIcon">
+      <ion-icon name="md-list-box" [style.color]="incident.statusColor" class="iconSize"></ion-icon>
+      <div>
+        <b [style.color]="incident.statusColor">Incident Details</b>
+      </div>
+    </div>
+
+    <ion-item>
+      <small [style.color]="incident.statusColor">Title</small>
+      <p>{{incident.title}}</p>
+    </ion-item>
+    <ion-item>
+      <small [style.color]="incident.statusColor">Description</small>
+      <p class="discription">{{incident.description}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-icon item-start name="checkmark-circle" [style.color]="incident.statusColor"></ion-icon>
+      <small item-start>Status </small>
+      <p item-end>{{incident.statusName}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-icon item-start name="information-circle" [style.color]="incident.statusColor"></ion-icon>
+      <small item-start>Priority </small>
+      <p item-end>{{incident.priority}}</p>
+    </ion-item>
   </ion-card>
 
+<!-- <scheduled> -->
   <div [ngSwitch]="incident.statusId">
 
-    <div *ngSwitchCase="2">
+    <!-- <div *ngSwitchCase="2">
       <button ion-button full round (click)="onSchedule(false)">Schedule</button>
-    </div>
+    </div> -->
 
 
     <div *ngSwitchCase="4">
 
-      <ion-item>
+      <!-- <ion-item>
         <ion-icon color="primary" item-start name="time"></ion-icon>
         <ion-label>Scheduled : </ion-label>
         <p item-end>{{incident.lastScheduleDate | date:'short'}}</p>
-      </ion-item>
+      </ion-item> -->
 
-      <div text-center *ngIf="!contactInfo">
-        <button ion-button small clear full (click)="onContact()">Show customer contact</button>
+      <div text-center *ngIf="!contactInfo" padding>
+        <button ion-button small round [style.background]="incident.statusColor" full (click)="onContact()" >Show customer contact</button>
       </div>
-      <ion-item *ngIf="contactInfo">
+      <ion-card *ngIf="contactInfo" padding>
 
-        <h4>
-          <b>{{contactInfo.customerAddressType}} Address</b>
-        </h4>
+          <div class="centerIcon">
+              <ion-icon name="ios-home" class="iconSize"  [style.color]="incident.statusColor"></ion-icon>
+              <div class="primaryColor"  [style.color]="incident.statusColor">{{contactInfo.customerAddressType}} Address</div>
+          </div>
         <p>{{contactInfo.customerAddress}}</p>
         <p>{{contactInfo.customerCity}}, {{contactInfo.customerPostalCode}}</p>
-        <p>{{contactInfo.customerState}}</p>
-        <p>{{contactInfo.customerCountry}}</p>
+        <p><span>{{contactInfo.customerState}}</span> ,<span>{{contactInfo.customerCountry}}</span> </p>
         <p>{{contactInfo.customerPhone}}</p>
-      </ion-item>
-      <div text-center>
+      </ion-card>
+      <!-- <div text-center>
         <button ion-button small clear full (click)="onHistory()">Go to History</button>
       </div>
 
@@ -90,23 +185,46 @@
         <ion-col col-4>
           <button ion-button small round full (click)="onNotFixed()">Not Fixed</button>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
     </div>
 
+
+  <!-- <fixed> -->
+
+
     <div *ngSwitchCase="7">
-      <ion-item>
+      <!-- <ion-item>
         <ion-icon item-start name="hammer" color="primary"></ion-icon>
         <ion-label>Fixed On: </ion-label>
         <p item-end>{{incident.lastModifiedAt | date}}</p>
-      </ion-item>
+      </ion-item> -->
       <ion-card>
-        <ion-card-header>Customer Signature</ion-card-header>
-        <div padding >
-          <img [src]="incident.signatureUrl" alt="Signature Image">
-        </div>
+          <div class="centerIcon">
+              <ion-icon  name="md-color-filter" class="iconSize" [style.color]="incident.statusColor"></ion-icon>
+              <div>
+                <b [style.color]="incident.statusColor">Customer's signature</b>
+              </div>
+            </div>
+          <div margin-top>
+            <img [src]="incident.signatureUrl" alt="Signature Image">
+          </div>
       </ion-card>
+      <div text-center *ngIf="!contactInfo" padding>
+          <button ion-button small round [style.background]="incident.statusColor" full (click)="onContact()" >Show customer contact</button>
+        </div>
+        <ion-card *ngIf="contactInfo" padding>
+  
+            <div class="centerIcon">
+                <ion-icon name="ios-home" class="iconSize"  [style.color]="incident.statusColor"></ion-icon>
+                <div class="primaryColor"  [style.color]="incident.statusColor">{{contactInfo.customerAddressType}} Address</div>
+            </div>
+          <p>{{contactInfo.customerAddress}}</p>
+          <p>{{contactInfo.customerCity}}, {{contactInfo.customerPostalCode}}</p>
+          <p><span>{{contactInfo.customerState}}</span> ,<span>{{contactInfo.customerCountry}}</span> </p>
+          <p>{{contactInfo.customerPhone}}</p>
+        </ion-card>
 
-      <div padding *ngIf="!contactInfo">
+      <!-- <div padding *ngIf="!contactInfo">
         <button ion-button small round full (click)="onContact()">Show customer contact</button>
       </div>
       <ion-item *ngIf="contactInfo">
@@ -118,44 +236,65 @@
           <p>{{contactInfo.customerState}}</p>
           <p>{{contactInfo.customerCountry}}</p>
           <p>{{contactInfo.customerPhone}}</p>
-        </ion-item>
-      <div padding>
+        </ion-item> -->
+      <!-- <div padding>
         <button ion-button small round full (click)="onHistory()">History</button>
-      </div>
+      </div> -->
 
     </div>
 
+<!-- <not fix> -->
+
+
     <div *ngSwitchCase="6">
-     <div padding *ngIf="!contactInfo">
-        <button ion-button small round full (click)="onContact()">Show customer contact</button>
-      </div>
-      <ion-item *ngIf="contactInfo">
-          <h4>
-            <b>{{contactInfo.customerAddressType}} Address</b>
-          </h4>
+     
+      <div text-center *ngIf="!contactInfo" padding>
+          <button ion-button small round [style.background]="incident.statusColor" full (click)="onContact()" >Show customer contact</button>
+        </div>
+        <ion-card *ngIf="contactInfo" padding>
+  
+            <div class="centerIcon">
+                <ion-icon name="ios-home" class="iconSize"  [style.color]="incident.statusColor"></ion-icon>
+                <div class="primaryColor"  [style.color]="incident.statusColor">{{contactInfo.customerAddressType}} Address</div>
+            </div>
           <p>{{contactInfo.customerAddress}}</p>
           <p>{{contactInfo.customerCity}}, {{contactInfo.customerPostalCode}}</p>
-          <p>{{contactInfo.customerState}}</p>
-          <p>{{contactInfo.customerCountry}}</p>
+          <p><span>{{contactInfo.customerState}}</span> ,<span>{{contactInfo.customerCountry}}</span> </p>
           <p>{{contactInfo.customerPhone}}</p>
-        </ion-item>
-
-      <div padding>
-        <button ion-button small round full (click)="onHistory()">History</button>
-      </div>
+        </ion-card>
+        
     </div>
 
     <div *ngSwitchCase="9">
-      <ion-card>
-        <ion-item text-wrap>
-          <p>This complaint has been put on hold after recieving unavailablity message from customer. Will be rescheduled soon.</p>
-        </ion-item>
-        <ion-col col-4>
-          <button ion-button small round (click)="onHistory()">History</button>
-        </ion-col>
-      </ion-card>
+      <div class="notePrimary">
+        This complaint has been put on hold after recieving unavailablity message from customer. Will be rescheduled soon.
+      </div>
     </div>
-
-
+      <ion-card *ngSwitchCase="9">
+         <div padding>
+            <button ion-button round  full (click)="onHistory()" class="history" [style.background]="incident.statusColor">History</button>
+        </div>
+      </ion-card>
   </div>
+
+  
+        
+            <ion-fab  bottom right [ngSwitch]="incident.statusId" >
+                <button ion-fab color="secondary" *ngSwitchCase="4"><ion-icon name="md-more"></ion-icon></button>
+                <ion-fab-list side="top" style="right: 0;">
+                 <div style="text-align: right;">
+                <button ion-button small round (click)="onFixed()" color="secondary" >Fixed</button>
+                <button ion-button small round (click)="onNotFixed()"color="secondary"  >Not Fixed</button> 
+               <button ion-button small round (click)="onSchedule(true)"color="secondary">Reschedule</button>
+              </div>
+              </ion-fab-list>
+            </ion-fab>
+            <ion-fab  bottom right [ngSwitch]="incident.statusId">
+                <button ion-fab color="secondary" *ngSwitchCase="2"><ion-icon name="md-more"></ion-icon></button>
+                <ion-fab-list side="top" style="right: 0;">
+                    <button ion-button full round (click)="onSchedule(false)"color="secondary" >Schedule</button>
+              </ion-fab-list>
+            </ion-fab>
+
+
 </ion-content>

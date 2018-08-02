@@ -1,18 +1,19 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>{{title}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <img src="https://i.pinimg.com/originals/67/19/0b/67190b2076ccdf40951b613878e6bdf8.png" class="status-image center-block"
+<ion-content class="background-color" >
+  
+  <img src="assets/imgs/schedule.png" class="status-image center-block"
     margin-top />
 
   <form #form="ngForm" novalidate (ngSubmit)="onChangeTime(form.value)">
-    <ion-card>
+      <ion-card>
       <ion-item>
         <ion-icon name="calendar" item-left color="primary"></ion-icon>
         <ion-label>Select Date</ion-label>
@@ -32,14 +33,15 @@
       <ion-item>
           <ion-icon name="chatbubbles" item-left color="primary"></ion-icon>
           <ion-label stacked>Enter Comment</ion-label>
-          <ion-input ngModel #comment="ngModel" name="comment" required ></ion-input>
+          <ion-input ngModel #comment="ngModel" name="comment" required  class="commentBox"></ion-input>
         </ion-item>
         <ion-item no-lines *ngIf="comment.dirty && comment.invalid ">
           <p style="color: red">Comment is required.</p>
         </ion-item>
-    </ion-card>
+      </ion-card>
     <div padding>
       <button ion-button block round type="submit" [disabled]="form.invalid">{{title}}</button>
     </div>
   </form>
+
 </ion-content>

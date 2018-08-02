@@ -20,7 +20,7 @@ export class FixIncidentPage {
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
   signaturePadOptions = {
     'minWidth': 2,
-    'canvasWidth': 600,
+    'canvasWidth': 295,
     'canvasHeight': 200,
     'backgroundColor': '#f6fbff',
     'penColor': '#666a73'
