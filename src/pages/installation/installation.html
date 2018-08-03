@@ -9,7 +9,7 @@
 <ion-content class="background-color">
     <ion-card class="product-card">
         <img [src]="installation.registeredProductPicUrl" class="productImage">
-        <div class="product-details" padding>
+        <div class="product-details" padding-left padding-right>
           <ion-card-title class="brand">
             <h4>
               <b>{{installation.productModelNumber}}</b>
@@ -145,7 +145,7 @@
               <div>{{contactInfo.customerAddressType}}</div>
               <div>{{contactInfo.customerAddress}}</div>
               <div>{{contactInfo.customerCity}}, {{contactInfo.customerState}}, {{contactInfo.customerCountry}}</div>
-              <div><b>PIN:</b> {{contactInfo.customerPostalCode}}</div>
+              <div>PIN: {{contactInfo.customerPostalCode}}</div>
              
             </ion-item>   
           </div>
