@@ -1,45 +1,26 @@
-
 <ion-header>
-
   <ion-navbar color="primary">
     <ion-title>History</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
-<!-- <ion-content>
-    <img src="/assets/imgs/history.png" class="pageImg">
-  <!-- <ion-list>
-    <ion-item *ngFor="let h of history" text-wrap>
-      <p><b>Status: </b>{{h.statusName}}</p>
-      <p><b>Date: </b>{{h.createdAt | date}}</p>
-      <p><b>Comment: </b>{{h.comment}} ({{h.autoComment}})</p>
-      <a *ngIf="h.fileUrl" (click)='openImage(h)'>View Attachment</a>
-    </ion-item>
-  </ion-list> -->
-  <!-- <div class="timeline">
-
-  </div>
-
-</ion-content> --> 
 <ion-content>
-    <img src="/assets/imgs/history.png" class="pageImg">
-    <div class="timeline">
-        <div class="history" *ngFor="let h of history">
-            <ion-badge [style.background]="h.statusColor">{{h.statusName}}</ion-badge>
-        <div class="comment">
-              <b>{{h.comment}}</b>
-            <p>
-                {{h.autoComment}}
-            </p>
-            <p padding-top *ngIf="h.fileUrl">
-                <a (click)='openImage(h)'>View Attachment</a>
-              </p>
-             <div class="date">
-               {{h.createdAt | date}}
-            </div>
-        </div>
+  <img src="/assets/imgs/history.png" class="pageImg">
+  <div class="timeline">
+    <div class="history" *ngFor="let h of history">
+      <ion-badge [style.background]="h.statusColor">{{h.statusName}}</ion-badge>
+      <div class="comment">
+        <b>{{h.comment}}</b>
+        <p>
+          {{h.autoComment}}
+        </p>
+        <p padding-top *ngIf="h.fileUrl">
+          <a (click)='openImage(h)'>View Attachment</a>
+        </p>
+        <div class="date">
+          {{h.createdAt | date}}
         </div>
       </div>
+    </div>
+  </div>
 </ion-content>

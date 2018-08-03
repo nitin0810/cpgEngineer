@@ -1,13 +1,13 @@
 <ion-header>
   <ion-navbar color="primary">
-  <button ion-button icon-only menuToggle>
-      <ion-icon  name="menu"></ion-icon>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Incidents</ion-title>
   </ion-navbar>
 
   <ion-toolbar>
-    <ion-segment [ngModel]="selectedSegment"  (ionChange)="onSegmentChange($event.value)">
+    <ion-segment [ngModel]="selectedSegment" (ionChange)="onSegmentChange($event.value)">
       <ion-segment-button value="assigned">Assigned
       </ion-segment-button>
       <ion-segment-button value="scheduled">Scheduled
@@ -24,28 +24,31 @@
 <ion-content class="background-color">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
-</ion-refresher>
-      <ion-list>
-          <ion-item text-wrap *ngFor="let inc of shownIncidents;let i=index" (click)='openIncidentPage(inc)'>
-            <ion-thumbnail item-start>
-              <img [src]="inc.registeredProductPicUrl">
-            </ion-thumbnail>
-              <p><b>{{inc.productName}}</b></p>
-              <div class="flex-space-between">
-              <p class="nowrap">{{inc.againstCategoryName}}</p>
-              <ion-badge>{{inc.priority}}</ion-badge>
-              </div>
-              <p>{{inc.lastModifiedAt | date}}</p> 
-          </ion-item>
-        </ion-list>
+  </ion-refresher>
+  <ion-list>
+    <ion-item text-wrap *ngFor="let inc of shownIncidents;let i=index" (click)='openIncidentPage(inc)'>
+      <ion-thumbnail item-start>
+        <img [src]="inc.registeredProductPicUrl">
+      </ion-thumbnail>
+      <p>
+        <b>{{inc.productName}}</b>
+      </p>
+      <div class="flex-space-between">
+        <p class="nowrap">{{inc.againstCategoryName}}</p>
+        <ion-badge [style.background]="inc.statusColor">{{inc.priority}}</ion-badge>
+      </div>
+      <p>{{inc.lastModifiedAt | date}}</p>
+    </ion-item>
+  </ion-list>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
-</ion-infinite-scroll>
+  </ion-infinite-scroll>
 
   <ion-fab right bottom>
-      <button ion-fab (click)="onSort()">
-          <ion-icon  name="arrow-round-down"></ion-icon><ion-icon name="arrow-round-up"></ion-icon>
-        </button>
-    </ion-fab>
+    <button ion-fab (click)="onSort()">
+      <ion-icon name="arrow-round-down"></ion-icon>
+      <ion-icon name="arrow-round-up"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

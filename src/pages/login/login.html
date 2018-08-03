@@ -1,77 +1,39 @@
-
-
-
-<!-- <ion-content>
-  <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
-    <ion-title>
-      Login
-    </ion-title>
-    <ion-card>
-
-      <ion-item>
-        <ion-icon color="primary" name="person" item-left></ion-icon>
-        <ion-label stacked>Username</ion-label>
-        <ion-input type="text" formControlName="contactNo" placeholder="Add phone number"></ion-input>
-      </ion-item>
-      <ion-item no-lines *ngIf="(contactNo.dirty || submitAttempt) && !contactNo.valid">
-        <p *ngIf="contactNo.hasError('required')" style="color: red">Contact No. is required.</p>
-        <p *ngIf="contactNo.hasError('pattern')" style="color: red">Contact No. is invalid.</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-icon color="primary" name="unlock" item-left></ion-icon>
-        <ion-label stacked>Password</ion-label>
-        <ion-input type="password" formControlName="password" placeholder="Add Password"></ion-input>
-      </ion-item>
-      <ion-item no-lines *ngIf="(password.dirty || submitAttempt) && !password.valid">
-        <p style="color: red">Password is required.</p>
-      </ion-item>
-      <button type="submit" ion-button full>Log In</button>
-
-    </ion-card>
-
-    <button type="button" ion-button clear (click)="onRegister()" float-right>Register</button> 
-
-
-   </form>
-</ion-content>  -->
-
-<ion-content >
+<ion-content>
   <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate class="loginForm">
-    <ion-title class="logintitle"> 
-   <b>Login</b>
+    <ion-title class="logintitle">
+      <b>Login</b>
     </ion-title>
-     
-        
-     <div style="position: relative;"> 
-        <div class="avatar">
-            <img src="/assets/imgs/avatar.png" class="avtarImage">
-        </div>
+
+
+    <div style="position: relative;">
+      <div class="avatar">
+        <img src="/assets/imgs/avatar.png" class="avtarImage">
+      </div>
       <ion-card class="loginCard">
-      
-      <ion-item>
-        <ion-icon color="primary" name="person" item-left></ion-icon>
-        <ion-label stacked>Username</ion-label>
-        <ion-input type="text" formControlName="contactNo" placeholder="Add phone number"></ion-input>
-      </ion-item>
-      <div *ngIf="(contactNo.dirty || submitAttempt) && !contactNo.valid" class="valid">
-        <span *ngIf="contactNo.hasError('required')" >Contact No. is required.</span>
-        <span *ngIf="contactNo.hasError('pattern')" >Contact No. is invalid.</span>
-      </div>
 
-      <ion-item>
-        <ion-icon color="primary" name="unlock" item-left></ion-icon>
-        <ion-label stacked>Password</ion-label>
-        <ion-input type="password" formControlName="password" placeholder="Add Password"></ion-input>
-      </ion-item>
-      <div no-lines *ngIf="(password.dirty || submitAttempt) && !password.valid" class="valid" margin-bottom>
-        <span>Password is required.</span>
-      </div>
-      <button type="submit" class="loginSubmit" ion-button full>Log In</button>
+        <ion-item>
+          <ion-icon color="primary" name="person" item-left></ion-icon>
+          <ion-label stacked>Username</ion-label>
+          <ion-input type="text" formControlName="contactNo" placeholder="Add phone number"></ion-input>
+        </ion-item>
+        <div *ngIf="(contactNo.dirty || submitAttempt) && !contactNo.valid" class="valid">
+          <span *ngIf="contactNo.hasError('required')">Contact No. is required.</span>
+          <span *ngIf="contactNo.hasError('pattern')">Contact No. is invalid.</span>
+        </div>
 
-    </ion-card>
-  </div> 
+        <ion-item>
+          <ion-icon color="primary" name="unlock" item-left></ion-icon>
+          <ion-label stacked>Password</ion-label>
+          <ion-input type="password" formControlName="password" placeholder="Add Password"></ion-input>
+        </ion-item>
+        <div no-lines *ngIf="(password.dirty || submitAttempt) && !password.valid" class="valid" margin-bottom>
+          <span>Password is required.</span>
+        </div>
+        <button type="submit" class="loginSubmit" ion-button full>Log In</button>
 
-     <!-- <button type="button" ion-button round small margin-right (click)="onRegister()" float-right>Register</button> -->
+      </ion-card>
+    </div>
+
+    <!-- <button type="button" ion-button round small margin-right (click)="onRegister()" float-right>Register</button> -->
   </form>
-</ion-content> 
+</ion-content>
