@@ -56,8 +56,8 @@ export class UserSessionManage {
                     this.menu.enable(true);
                     // this.enablePushNotifications();
                 }, (err: any) => {
-                    this.customService.showToast('Some error occured, Please Reopen the App or Logout');
-                });
+                    localStorage.clear();
+                    this.appCtrl.getRootNavs()[0].setRoot("LoginPage",{},{animate:true,direction:'forward'});                });
 
         } else {
             this.rootPage = "LoginPage";
