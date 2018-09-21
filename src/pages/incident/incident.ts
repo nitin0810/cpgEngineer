@@ -11,7 +11,6 @@ import { Incident } from '../../Classes/Models/incident.model';
   selector: 'page-incident',
   templateUrl: 'incident.html',
 })
-
 export class IncidentPage {
 
   title = '';

@@ -15,7 +15,7 @@
         </h4>
         <p>
           {{incident.productName}}
-          <p>
+        </p>
             <p>
               <b> Purchase Date : </b> {{incident.productPurchaseDate}}
             </p>
@@ -91,9 +91,9 @@
       </div>
     </div>
 
-    <ion-item>
+    <ion-item *ngIf="incident.title">
       <small [style.color]="incident.statusColor">Title</small>
-      <p>{{incident.title}}</p>
+      <p >{{incident.title}}</p>
     </ion-item>
     <ion-item>
       <small [style.color]="incident.statusColor">Description</small>
