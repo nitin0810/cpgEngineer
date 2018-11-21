@@ -2,7 +2,22 @@ page-installations {
   ion-grid {
     padding: 0px !important;
   }
+  .imageProduct{
+    height: 100%;
+    img{
+        height: auto;
+        width: 100px;
+        top: 50%;
+        transform: translateY(-50%);
+        position: relative;
+      
+    }
+  }
   .prductDetails {
+    display: flex;
+    flex-direction: column;
+  justify-content: space-between;
+
     border: 1px solid rgba(128, 128, 128, 0.2);
   }
   .prductDetails:nth-child(even) {

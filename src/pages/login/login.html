@@ -14,7 +14,7 @@
         <ion-item>
           <ion-icon color="primary" name="person" item-left></ion-icon>
           <ion-label stacked>Username</ion-label>
-          <ion-input type="text" formControlName="contactNo" placeholder="Add phone number"></ion-input>
+          <ion-input type="text" formControlName="contactNo" placeholder="User name"></ion-input>
         </ion-item>
         <div *ngIf="(contactNo.dirty || submitAttempt) && !contactNo.valid" class="valid">
           <span *ngIf="contactNo.hasError('required')">Contact No. is required.</span>
