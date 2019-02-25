@@ -17,8 +17,8 @@ export class ScheduleIncidentPage {
   incidentId: number;
   reschedule: boolean;
   // for showing initial values
-  currentDate: '';
-  currentTime: '';
+  currentDate = '';
+  currentTime = '';
   callback: any;
   installing = false; // to differentiate incident and installment
 
@@ -38,6 +38,9 @@ export class ScheduleIncidentPage {
     if (this.navParams.get('lastScheduleDate')) {
 
       [this.currentDate, this.currentTime] = this.navParams.get('lastScheduleDate').split('T');
+    } else {
+      [this.currentDate, this.currentTime] = [this.minDate, ''];
+
     }
   }
 

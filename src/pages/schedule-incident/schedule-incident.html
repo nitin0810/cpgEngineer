@@ -24,7 +24,7 @@
       <ion-item>
         <ion-icon name="clock" item-left color="primary"></ion-icon>
         <ion-label>Select Time</ion-label>
-        <ion-datetime ngModel [ngModel]="currentTime" #time="ngModel" name="time" required displayFormat="hh:mm A" pickerFormat="hh:mm A"></ion-datetime>
+        <ion-datetime  [ngModel]="currentTime" #time="ngModel" name="time" required displayFormat="hh:mm A" pickerFormat="hh:mm A"></ion-datetime>
       </ion-item>
       <ion-item no-lines *ngIf="time.dirty && time.invalid ">
         <p style="color: red">Time is required.</p>

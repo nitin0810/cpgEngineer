@@ -20,7 +20,7 @@
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-list>
+  <ion-list *ngIf="shownIncidents?.length!=0">
     <ion-item text-wrap *ngFor="let inc of shownIncidents;let i=index" (click)='openIncidentPage(inc)'>
       <ion-thumbnail item-start>
         <img [src]="inc.registeredProductPicUrl">
@@ -35,6 +35,10 @@
       <p>{{inc.lastModifiedAt | date}}</p>
     </ion-item>
   </ion-list>
+
+  <div *ngIf="shownIncidents?.length===0" style="text-align: center;padding: 10px;">
+    <h4>No Data Found</h4>
+  </div>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

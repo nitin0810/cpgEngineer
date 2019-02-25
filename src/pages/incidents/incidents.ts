@@ -72,11 +72,7 @@ export class IncidentsPage {
   onSegmentChange(selectedStatusId: number) {
 
     this.selectedStatusId = selectedStatusId;
-    if (this.allIncidents[this.selectedStatusId].list.length === 0) {
-      this.getIncidentList(true, this.selectedStatusId);
-    } else {
-      this.shownIncidents = this.allIncidents[this.selectedStatusId].list;
-    }
+    this.getIncidentList(true, this.selectedStatusId);
   }
 
   initializeAllIncidents(statusList: Status[]) {
@@ -122,7 +118,9 @@ export class IncidentsPage {
 
   openIncidentPage(inc: Incident) {
     const clbk = () => {
-      // this clbk is not needed anymore, since data is coming already filtered from server
+      debugger;
+      const index = this.allIncidents[this.selectedStatusId].list.findIndex(inci=>inci.id===inc.id);
+      this.allIncidents[this.selectedStatusId].list.splice(index,1);
     }
     this.navCtrl.push('IncidentPage', { 'incident': inc, 'callback': clbk });
   }

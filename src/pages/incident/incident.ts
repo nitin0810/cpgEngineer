@@ -15,10 +15,10 @@ export class IncidentPage {
 
   title = '';
   incident: Incident;
-  contactInfo:any;   
-  
-  callback:any;
-    
+  contactInfo: any;
+
+  callback: any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -29,7 +29,7 @@ export class IncidentPage {
     this.incident = this.navParams.get('incident');
     this.callback = this.navParams.get('callback');
     this.title = this.incident.productName;
-    
+
   }
 
   ionViewDidLoad() {
@@ -41,7 +41,7 @@ export class IncidentPage {
       if (updatedIncident) {
         this.incident.lastScheduleDate = updatedIncident.lastScheduleDate;
         this.updateStatusInfo(updatedIncident);
-
+        this.callback();
       }
     };
     this.navCtrl.push('ScheduleIncidentPage', { 'incidentId': this.incident.id, 'isReScheduled': isReScheduled, 'callback': clbk, 'lastScheduleDate': this.incident.lastScheduleDate });
@@ -52,9 +52,10 @@ export class IncidentPage {
       if (updatedIncident) {
         this.incident.signatureUrl = updatedIncident.signatureUrl;
         this.updateStatusInfo(updatedIncident);
+        this.callback();
       }
     };
-    this.navCtrl.push('FixIncidentPage', { 'incidentId': this.incident.id,'clbk': clbk });
+    this.navCtrl.push('FixIncidentPage', { 'incidentId': this.incident.id, 'clbk': clbk });
 
 
   }
@@ -77,10 +78,10 @@ export class IncidentPage {
             this.reschedule(data[0]);
           }
 
-        }     
+        }
       }]
     });
-    alert.present();      
+    alert.present();
   }
 
   reschedule(comment: string) {
@@ -101,19 +102,19 @@ export class IncidentPage {
         this.customService.hideLoader();
         this.customService.showToast(err.msg);
       });
-  }        
-  
+  }
+
   updateStatusInfo(updatedIncident: any) {
     this.incident.statusColor = updatedIncident.statusColor;
     this.incident.statusId = updatedIncident.statusId;
     this.incident.statusName = updatedIncident.statusName;
     // for changing the postions of incident on main incidents list page 
-    if(this.callback){this.callback();}
+    if (this.callback) { this.callback(); }
   }
 
-  onContact(){
+  onContact() {
     this.customService.showLoader();
-    this.incidentService.getContact( this.incident.id)
+    this.incidentService.getContact(this.incident.id)
       .subscribe((res: any) => {
         this.customService.hideLoader();
         this.contactInfo = res;
@@ -123,13 +124,13 @@ export class IncidentPage {
         this.customService.showToast(err.msg);
       });
   }
-     
-  onHistory(){
+
+  onHistory() {
     this.customService.showLoader();
-    this.incidentService.getHistory( this.incident.id)
+    this.incidentService.getHistory(this.incident.id)
       .subscribe((res: any) => {
         this.customService.hideLoader();
-        this.navCtrl.push("HistoryPage",{'history':res});
+        this.navCtrl.push("HistoryPage", { 'history': res });
       }, (err: any) => {
 
         this.customService.hideLoader();

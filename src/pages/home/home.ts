@@ -13,4 +13,8 @@ export class HomePage {
 
   }
 
+  onIconClick(page:string){
+    this.navCtrl.setRoot(page,{},{animate:true,direction:'forward'});
+  }
+
 }

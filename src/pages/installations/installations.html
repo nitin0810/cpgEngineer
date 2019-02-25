@@ -13,7 +13,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-grid>
+  <ion-grid *ngIf="installations?.length!==0">
     <ion-row>
       <ion-col text-center class="prductDetails activeItem" col-6 *ngFor="let inc of installations;let i=index" (click)='openInstallationPage(inc)'>
        <div class="imageProduct">
@@ -29,6 +29,11 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  
+  <div *ngIf="installations?.length===0" style="text-align: center;padding: 10px;">
+    <h4>No Data Found</h4>
+  </div>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
