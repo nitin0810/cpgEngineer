@@ -16,7 +16,9 @@
             <div class="bgcolorDiv">
                
                <ion-list class="sideMenu" >
-                   <div class="sideImage"><img src="assets/imgs/avatar.png" class="sideBarAvatar"></div>
+                   <div class="sideImage"><img [src]="userImage ||'assets/imgs/avatar.png'" class="sideBarAvatar">
+                    <h6 style="color: white">{{userName | titlecase}}</h6>
+                </div>
                    <button   class="sidebarContent" ion-item *ngFor="let option of sideMenuOptions" (click)="openPage(option)" [ngClass]="{'activePage': activePage == option.component}">
                        <ion-icon  [name]="option.icon"  item-left></ion-icon>{{option.title}}
                    </button>

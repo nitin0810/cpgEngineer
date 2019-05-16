@@ -54,6 +54,7 @@ export class UserSessionManage {
                     this.rootPage = "HomePage";
                     this.decideSideMenuContent();
                     this.menu.enable(true);
+                    this.imageUpdate();
                     // this.enablePushNotifications();
                 }, (err: any) => {
                     localStorage.clear();
@@ -70,7 +71,7 @@ export class UserSessionManage {
         this.decideSideMenuContent();
         this.menu.enable(true);
         // this.enablePushNotifications();
-        // this.imageUpdate();
+        this.imageUpdate();
     }
 
     // enablePushNotifications() {
@@ -93,7 +94,7 @@ export class UserSessionManage {
     public imageUpdate() {
 
         this.userImage = JSON.parse(localStorage.getItem('userInfo')).picUrl;
-        this.userName = JSON.parse(localStorage.getItem('userInfo')).username || '';
+        this.userName = JSON.parse(localStorage.getItem('userInfo')).name || '';
     }
 
     public logout() {
